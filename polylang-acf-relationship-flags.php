@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: ACF + Polylang relationship flags
+  Plugin Name: ACF + Polylang Relationship Flags
   Plugin URI: https://github.com/certainlyakey
   GitHub URI: https://github.com/certainlyakey
   Description: Adds a tiny flag image corresponding to post/term language in ACF relationship and taxonomy fields.
