@@ -39,8 +39,11 @@ function aprf_polylang_display_language_code_for_object( $type = 'post', $id = n
     }
     
     if ( $current_lang ) {
+      $lang_term = get_term_by( 'slug', $current_lang, 'language' );
+      $pll_lang = new PLL_Language($lang_term);
+      $pll_lang_description = maybe_unserialize($pll_lang->description);
       $plugin_path = file_exists( WP_PLUGIN_DIR . '/polylang-pro/' ) ? WP_PLUGIN_DIR . '/polylang-pro/' : WP_PLUGIN_DIR . '/polylang/';
-      $flag = file_get_contents( $plugin_path . 'flags/' . ( $current_lang === 'en' ? 'us' : $current_lang ) . '.png' );
+      $flag_file = file_get_contents( $plugin_path . 'flags/' . $pll_lang_description['flag_code'] . '.png' );
 
       if ( $translations_ids ) {
         
@@ -80,8 +83,8 @@ function aprf_polylang_display_language_code_for_object( $type = 'post', $id = n
         
       }
 
-      if ( $flag ) {
-        $output .= ' <img alt="' . __( 'Flag', 'aprf' ) . '"' . $flag_title_attr . ' src="' . 'data:image/png;base64,' . base64_encode( $flag ) . '">';
+      if ( $flag_file ) {
+        $output .= ' <img alt="' . __( 'Flag', 'aprf' ) . '"' . $flag_title_attr . ' src="' . 'data:image/png;base64,' . base64_encode( $flag_file ) . '">';
       } else {
         $output .= ' (' . $slug . ')';
       }
