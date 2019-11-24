@@ -84,7 +84,7 @@ function aprf_polylang_display_language_code_for_object( $type = 'post', $id = n
       }
 
       if ( $flag_file ) {
-        $output .= ' <img alt="' . __( 'Flag', 'aprf' ) . '"' . $flag_title_attr . ' src="' . 'data:image/png;base64,' . base64_encode( $flag_file ) . '">';
+        $output .= ' <img style="margin-left: 2px" alt="' . __( 'Flag', 'aprf' ) . '"' . $flag_title_attr . ' src="' . 'data:image/png;base64,' . base64_encode( $flag_file ) . '">';
       } else {
         $output .= ' (' . $slug . ')';
       }
@@ -103,7 +103,7 @@ function aprf_array_map_assoc(callable $f, array $a) {
 
 
 // Append edit post link to relationship fields in admin
-function aprf_append_edit_link_to_relationship_field_admin( $title, $post, $field, $post_id ) {
+function aprf_update_relationship_field_admin( $title, $post, $field, $post_id ) {
 
   if ( 
     function_exists( 'pll_is_translated_post_type' ) &&
@@ -120,7 +120,24 @@ function aprf_append_edit_link_to_relationship_field_admin( $title, $post, $fiel
   return $title;
 }
 
-add_filter('acf/fields/relationship/result', 'aprf_append_edit_link_to_relationship_field_admin', 10, 4);
+add_filter('acf/fields/relationship/result', 'aprf_update_relationship_field_admin', 10, 4);
+
+
+
+// Append flag to post_object fields in admin
+function aprf_update_postobject_field_admin( $title, $post, $field, $post_id ) {
+
+  if ( 
+    function_exists( 'pll_is_translated_post_type' ) &&
+    pll_is_translated_post_type( $post->post_type )
+  ) {
+    $title .= aprf_polylang_display_language_code_for_object( 'post', $post->ID );
+  }
+
+  return $title;
+}
+
+add_filter('acf/fields/post_object/result', 'aprf_update_postobject_field_admin', 10, 4);
 
 
 
