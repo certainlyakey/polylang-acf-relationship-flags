@@ -44,7 +44,7 @@ function aprf_polylang_display_language_code_for_object( $type = 'post', $id = n
       $pll_lang = new PLL_Language($lang_term);
       $pll_lang_description = maybe_unserialize($pll_lang->description);
       $flags_path = file_exists( WP_PLUGIN_DIR . '/polylang-pro/' ) ? WP_PLUGIN_DIR . '/polylang-pro/vendor/wpsyntex/polylang/flags/' : WP_PLUGIN_DIR . '/polylang/flags/';
-      $flag_file = file_get_contents( $flags_path .  . $pll_lang_description['flag_code'] . '.png' );
+      $flag_file = file_get_contents( $flags_path . $pll_lang_description['flag_code'] . '.png' );
 
       if ( $translations_ids ) {
 
