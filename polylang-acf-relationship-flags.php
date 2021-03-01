@@ -16,14 +16,15 @@
 function aprf_polylang_display_language_code_for_object( $type = 'post', $id = null ) {
 
   $output = '';
-  
-  if ( 
+
+  if (
     // Polylang exists
-    function_exists( 'pll_get_post_language' ) && 
+    function_exists( 'pll_get_post_language' ) &&
     // ACF exists
-    function_exists( 'acf_get_setting' ) && 
+    function_exists( 'acf_get_setting' ) &&
+    is_array( pll_languages_list() ) &&
     // There's more than one language active
-    count( pll_languages_list() > 1 )
+    count( pll_languages_list() ) > 1
   ) {
 
     // language slug
